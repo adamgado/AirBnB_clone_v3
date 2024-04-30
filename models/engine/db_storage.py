@@ -76,7 +76,7 @@ class DBStorage:
         self.__session.remove()
 
     def get(self, cls, id):
-        """retrieve one object"""
+        """retrieves one object"""
         obj_d = models.storage.all(cls)
         for key, value in obj_d.items():
             target = str(cls) + '.' + str(id)

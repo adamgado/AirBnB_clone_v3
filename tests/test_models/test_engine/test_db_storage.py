@@ -83,3 +83,27 @@ class TestFileStorage(unittest.TestCase):
 
     def test_save(self):
         """Test that save properly saves objects to file.json"""
+
+    def test_get(self):
+        """tests get"""
+        storage = FileStorage()
+        d = {"name": "random"}
+        inst = State(**d)
+        storage.new(inst)
+        storage.save()
+        storage = FileStorage()
+        get_i = storage.get(State, inst.id)
+        self.assertEqual(get_i, inst)
+
+    def test_count(self):
+        """tests count"""
+        storage = FileStorage()
+        d = {"name": "random1"}
+        s = State(**d)
+        storage.new(s)
+        d = {"name": "random2", "state_id": state.id}
+        c = City(**d)
+        storage.new(c)
+        storage.save()
+        n = storage.count()
+        self.assertEqual(len(storage.all()), n)
